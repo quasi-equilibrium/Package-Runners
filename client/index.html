@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <title>Package Runners</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="rotateHint" class="rotate-hint">
+      <p>Oyunu oynamak icin telefonu yatay cevir.</p>
+    </div>
+
+    <main id="app" class="app-shell">
+      <section id="joinScreen" class="screen screen-visible">
+        <h1 class="title">Package Runners</h1>
+        <p class="subtitle">Parodi paketini sec, adini yaz, kosuya gir.</p>
+        <label class="input-label" for="nicknameInput">Oyuncu Ismi</label>
+        <input id="nicknameInput" maxlength="16" minlength="3" placeholder="En az 3 karakter" />
+
+        <div id="characterGrid" class="character-grid">
+          <button class="character-card selected" data-char="doritos_like">
+            <span class="pack-icon tri"></span>
+            <span>Ucgen Cips</span>
+          </button>
+          <button class="character-card" data-char="cheetos_like">
+            <span class="pack-icon puff"></span>
+            <span>Citir Paket</span>
+          </button>
+          <button class="character-card" data-char="pringles_like">
+            <span class="pack-icon tube"></span>
+            <span>Tup Kutu</span>
+          </button>
+          <button class="character-card" data-char="biskrem_like">
+            <span class="pack-icon bisk"></span>
+            <span>Yatay Biskuvi</span>
+          </button>
+        </div>
+
+        <button id="joinBtn" class="primary-btn">Lobiye Gir</button>
+        <p id="joinError" class="error-text"></p>
+      </section>
+
+      <section id="lobbyScreen" class="screen">
+        <header class="lobby-header">
+          <h2>Global Lobi</h2>
+          <p id="lobbyStateText">Oyuncular bekleniyor...</p>
+        </header>
+
+        <div class="level-picker">
+          <p>Level Secimi</p>
+          <div id="levelButtons" class="level-buttons">
+            <button data-level="ice" class="level-btn level-selected">Buz</button>
+            <button data-level="desert" class="level-btn">Col</button>
+            <button data-level="neon" class="level-btn">Gece Neon</button>
+          </div>
+        </div>
+
+        <ul id="playerList" class="player-list"></ul>
+        <p id="queueInfo" class="queue-text"></p>
+        <button id="startBtn" class="primary-btn">Maci Baslat</button>
+      </section>
+
+      <section id="gameScreen" class="screen">
+        <div class="hud-top">
+          <span id="hudRank">Sira: -</span>
+          <span id="hudLevel">Level: -</span>
+          <span id="hudTime">00:00</span>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div class="controls-left">
+          <button id="powerBtn" class="control-btn power-btn">?</button>
+        </div>
+        <div class="controls-right">
+          <button id="upBtn" class="control-btn">Yukari</button>
+          <button id="downBtn" class="control-btn">Asagi</button>
+        </div>
+      </section>
+
+      <section id="resultScreen" class="screen">
+        <h2>Mac Sonucu</h2>
+        <ol id="resultList" class="result-list"></ol>
+        <h3>Kalici Skor Tablosu</h3>
+        <ol id="leaderboardList" class="result-list"></ol>
+        <button id="readyBtn" class="primary-btn">Hazirim</button>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

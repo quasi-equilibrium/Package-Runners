@@ -1,0 +1,349 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Nunito:wght@500;700;900&display=swap");
+
+:root {
+  --bg-a: #08203e;
+  --bg-b: #557c93;
+  --panel: rgba(14, 20, 33, 0.76);
+  --panel-border: rgba(255, 255, 255, 0.24);
+  --text: #f9fbff;
+  --muted: #d5deef;
+  --accent: #ffb703;
+  --accent-strong: #fb8500;
+  --danger: #ff4f5e;
+  --safe: #48d08b;
+  --btn-shadow: 0 0.45rem 1rem rgba(0, 0, 0, 0.33);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, #2a4e78, var(--bg-a) 42%, #030816);
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+  overflow: hidden;
+}
+
+.app-shell {
+  position: fixed;
+  inset: 0;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
+  padding: 1.2rem;
+}
+
+.screen-visible {
+  display: flex;
+}
+
+#joinScreen,
+#lobbyScreen,
+#resultScreen {
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.85rem;
+  margin: auto;
+  width: min(92vw, 56rem);
+  height: min(94vh, 33rem);
+  border: 0.12rem solid var(--panel-border);
+  border-radius: 1.15rem;
+  background: linear-gradient(145deg, rgba(8, 16, 33, 0.86), rgba(25, 40, 65, 0.82));
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.38);
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+  font-family: "Bungee", sans-serif;
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  letter-spacing: 0.04em;
+}
+
+.subtitle {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+.input-label {
+  font-weight: 800;
+}
+
+input {
+  width: 100%;
+  border: 0.1rem solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.95rem;
+  font: inherit;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.character-card {
+  border: 0.12rem solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+  color: var(--text);
+  border-radius: 0.9rem;
+  min-height: 4.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.7rem;
+  padding: 0.65rem;
+}
+
+.character-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0.95rem rgba(255, 183, 3, 0.32);
+  transform: translateY(-0.08rem);
+}
+
+.pack-icon {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.pack-icon.tri {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, #ff4f00, #ffd166);
+}
+
+.pack-icon.puff {
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, #ff7b00, #ffd166);
+}
+
+.pack-icon.tube {
+  border-radius: 999rem;
+  background: linear-gradient(180deg, #cf2f45, #201128);
+}
+
+.pack-icon.bisk {
+  border-radius: 999rem;
+  width: 2.5rem;
+  background: linear-gradient(180deg, #8f5a34, #f2cb8f);
+}
+
+.primary-btn {
+  border: none;
+  border-radius: 0.9rem;
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  color: #0c1320;
+  font-size: 1.05rem;
+  font-weight: 900;
+  padding: 0.8rem 1rem;
+  box-shadow: var(--btn-shadow);
+}
+
+.primary-btn:disabled {
+  opacity: 0.45;
+}
+
+.error-text {
+  margin: 0;
+  color: var(--danger);
+  min-height: 1.2rem;
+}
+
+.player-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.player-list li {
+  border: 0.08rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 0.58rem 0.72rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.player-leader {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.queue-text {
+  color: var(--muted);
+  margin: 0;
+}
+
+.level-picker {
+  padding: 0.75rem;
+  border-radius: 0.8rem;
+  border: 0.08rem solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.level-picker p {
+  margin: 0 0 0.45rem;
+  font-weight: 800;
+}
+
+.level-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.level-btn {
+  flex: 1;
+  border: 0.1rem solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.65rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.5rem 0.2rem;
+  font-weight: 800;
+}
+
+.level-btn.level-selected {
+  border-color: var(--safe);
+  box-shadow: 0 0 0.8rem rgba(72, 208, 139, 0.34);
+}
+
+#gameScreen {
+  padding: 0;
+  display: none;
+}
+
+#gameCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hud-top {
+  position: absolute;
+  top: env(safe-area-inset-top, 0.4rem);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0.8rem;
+  font-weight: 900;
+  text-shadow: 0 0.15rem 0.3rem rgba(0, 0, 0, 0.8);
+}
+
+.controls-left,
+.controls-right {
+  position: absolute;
+  z-index: 25;
+  bottom: max(0.6rem, env(safe-area-inset-bottom));
+  display: flex;
+}
+
+.controls-left {
+  left: 0.8rem;
+}
+
+.controls-right {
+  right: 0.8rem;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.control-btn {
+  min-width: 4.7rem;
+  min-height: 3.2rem;
+  border: 0.12rem solid rgba(255, 255, 255, 0.32);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(15, 25, 42, 0.9), rgba(7, 12, 20, 0.94));
+  color: #fff;
+  font-family: "Bungee", sans-serif;
+  font-size: 0.85rem;
+}
+
+.control-btn:active {
+  transform: scale(0.97);
+}
+
+.power-btn {
+  min-width: 5.5rem;
+  min-height: 4rem;
+  border-color: rgba(255, 183, 3, 0.7);
+}
+
+.shake {
+  animation: shake 0.2s linear;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-0.2rem);
+  }
+  50% {
+    transform: translateX(0.2rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.result-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.36rem;
+}
+
+.rotate-hint {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 2rem;
+  background: rgba(4, 6, 10, 0.96);
+}
+
+@media (orientation: portrait) {
+  .rotate-hint {
+    display: flex;
+  }
+
+  .app-shell {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-height: 500px) {
+  #joinScreen,
+  #lobbyScreen,
+  #resultScreen {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+}
