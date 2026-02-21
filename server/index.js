@@ -1,5 +1,6 @@
 import "dotenv/config";
 import http from "node:http";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
@@ -15,6 +16,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 
 const port = Number(process.env.PORT ?? 3000);
+const host = process.env.HOST ?? "0.0.0.0";
 const corsOrigins = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(",").map((entry) => entry.trim()) : "*";
 
 const app = express();
@@ -510,6 +512,17 @@ setInterval(() => {
   }
 }, Math.round(1000 / GAME_CONFIG.SERVER_TICK_HZ));
 
-server.listen(port, () => {
-  console.log(`Package Runners server listening on http://localhost:${port}`);
+server.listen(port, host, () => {
+  const urls = new Set([`http://localhost:${port}`]);
+  for (const entries of Object.values(os.networkInterfaces())) {
+    for (const entry of entries ?? []) {
+      if (entry.family === "IPv4" && !entry.internal) {
+        urls.add(`http://${entry.address}:${port}`);
+      }
+    }
+  }
+  console.log("Package Runners server listening:");
+  for (const url of urls) {
+    console.log(`- ${url}`);
+  }
 });

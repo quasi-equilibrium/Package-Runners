@@ -19,11 +19,14 @@ npm install
 npm run start
 ```
 
-Varsayilan adres: `http://localhost:3000/client/index.html`
+Server acilinca terminalde `localhost` ve yerel ag (`192.168.x.x`) adresleri yazdirilir.
+Telefondan oynamak icin ayni Wi-Fi aginda su adrese gir:
+`http://<bilgisayar-ip>:3000/client/index.html`
 
 ## Ortam Degiskenleri
 
 - `PORT`: server portu (default: `3000`)
+- `HOST`: bind hostu (default: `0.0.0.0`)
 - `DATABASE_URL`: Postgres baglanti dizesi (verilmezse in-memory fallback)
 - `DATABASE_SSL`: `false` verilirse SSL kapanir
 - `CORS_ORIGINS`: virgulle ayrilmis origin listesi (default: `*`)
@@ -34,18 +37,24 @@ Varsayilan adres: `http://localhost:3000/client/index.html`
 npm test
 ```
 
-## Deploy
+## Lokal Backend (Bu Bilgisayar)
 
-### Backend (Render Free)
+1. `.env.example` dosyasini `.env` olarak kopyala ve gerekirse duzenle.
+2. `npm run start` ile serveri calistir.
+3. Windows Firewall sorarsa Node icin `Private network` izni ver.
+4. Telefonlar ayni agda bu adrese girsin:
+   `http://<bilgisayar-ip>:3000/client/index.html`
 
-1. Repo bagla
-2. `render.yaml` kullanarak web service olustur
-3. `DATABASE_URL` icin Render Postgres bagla
-4. `CORS_ORIGINS` degerine GitHub Pages domainini ekle
+Notlar:
+- Backend bu bilgisayarda calistigi surece oyun erisilebilir olur.
+- Bilgisayar kapanirsa veya server durursa oyun kapanir.
+- Internetten erisim gerekiyorsa port-forward/tunnel gerekir.
 
-### Frontend (GitHub Pages)
+## Frontend Ayri Host Edilecekse
 
-`client/` klasorunu Pages kaynagi olarak yayinla.
-Gerekirse backend adresi icin URL parametresi kullan:
+`client/index.html` URL'ine backend parametresi eklenebilir:
 
-`https://<kullanici>.github.io/<repo>/client/index.html?server=https://<render-servisi>.onrender.com`
+`?server=http://<bilgisayar-ip>:3000`
+
+Ornek:
+`https://<kullanici>.github.io/<repo>/client/index.html?server=http://192.168.1.50:3000`
